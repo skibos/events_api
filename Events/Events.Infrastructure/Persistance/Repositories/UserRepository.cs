@@ -1,5 +1,6 @@
 ﻿using Events.Application.Common.Interfaces.Persistance;
 using Events.Domain.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace Events.Infrastructure.Persistance.Repositories
 {
@@ -16,6 +17,11 @@ namespace Events.Infrastructure.Persistance.Repositories
         {
             _dbContext.Add(user);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<User?> GetByEmail(string email)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

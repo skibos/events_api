@@ -15,11 +15,17 @@ namespace Events.Application.Authentication.Commands.Register
 
         public async Task<Unit> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
-            // TODO: check if user exists in db
-            
-            User user = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));
+            User? userFromDb = await _userRepository.GetByEmail(command.Email);
 
-            await _userRepository.Add(user);
+            if (userFromDb is not null)
+            {
+                // TODO: add handling custom exceptions
+                throw new InvalidOperationException("User already exists");
+            }
+
+            User newUser = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));
+
+            await _userRepository.Add(newUser);
 
             return Unit.Value;
             // TODO: generate jwt
