@@ -16,8 +16,8 @@ namespace Events.Application.Authentication.Commands.Register
         public async Task<Unit> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
             // TODO: check if user exists in db
-
-            User user = User.Create(command.FirstName, command.LastName, command.Email, command.Password);
+            
+            User user = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));
 
             await _userRepository.Add(user);
 
