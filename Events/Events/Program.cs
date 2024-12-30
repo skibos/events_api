@@ -1,4 +1,5 @@
 ﻿using Events.API;
+using Events.API.Middleware;
 using Events.Application;
 using Events.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ var app = builder.Build();
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseMiddleware<ErrorHandlingMiddleware>();
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();

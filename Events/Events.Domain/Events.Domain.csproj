@@ -11,12 +11,16 @@
     <None Remove="Common\Models\" />
     <None Remove="Users\" />
     <None Remove="Users\ValueObjects\" />
+    <None Remove="Users\Exceptions\" />
+    <None Remove="Common\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Common\Models\" />
     <Folder Include="Users\" />
     <Folder Include="Users\ValueObjects\" />
+    <Folder Include="Users\Exceptions\" />
+    <Folder Include="Common\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />

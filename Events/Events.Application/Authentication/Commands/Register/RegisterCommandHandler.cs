@@ -1,5 +1,6 @@
 ﻿using Events.Application.Common.Interfaces.Persistance;
 using Events.Domain.Users;
+using Events.Domain.Users.Exceptions;
 using MediatR;
 
 namespace Events.Application.Authentication.Commands.Register
@@ -19,8 +20,7 @@ namespace Events.Application.Authentication.Commands.Register
 
             if (userFromDb is not null)
             {
-                // TODO: add handling custom exceptions
-                throw new InvalidOperationException("User already exists");
+                throw new UserAlreadyExistsException(command.Email);
             }
 
             User newUser = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));

@@ -2,6 +2,7 @@
 using MediatR;
 using Events.API.Dto.Auth;
 using Events.Application.Authentication.Commands.Register;
+using Events.Domain.Users.Exceptions;
 
 namespace Events.Controllers;
 
@@ -17,6 +18,8 @@ public class AuthenticationController : ControllerBase
     }
 
     [Route("register"), HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(UserAlreadyExistsException))]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         RegisterCommand registerCommand = new (FirstName: request.FirstName, LastName: request.LastName, Email: request.Email, Password: request.Password);
