@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Events.API.Dto.Auth;
+using Events.Application.Authentication.Commands.Register;
 
 namespace Events.Controllers;
 
@@ -15,13 +17,17 @@ public class AuthenticationController : ControllerBase
     }
 
     [Route("register"), HttpPost]
-    public async Task<IActionResult> Register()
+    public async Task<IActionResult> Register(RegisterRequest request)
     {
-        return Ok();
+        RegisterCommand registerCommand = new (FirstName: request.FirstName, LastName: request.LastName, Email: request.Email, Password: request.Password);
+
+        await _mediator.Send(registerCommand);
+
+        return NoContent();
     }
 
     [Route("login"), HttpPost]
-    public async Task<IActionResult> Login()
+    public async Task<IActionResult> Login(LoginRequest request)
     {
         return Ok();
     }
