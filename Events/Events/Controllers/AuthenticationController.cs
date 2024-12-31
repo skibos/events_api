@@ -4,6 +4,8 @@ using Events.API.Dto.Auth;
 using Events.Application.Authentication.Commands.Register;
 using Events.Domain.Users.Exceptions;
 using Events.Application.Authentication.Queries.Login;
+using Events.Application.Authentication.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Events.Controllers;
 
@@ -25,9 +27,9 @@ public class AuthenticationController : ControllerBase
     {
         RegisterCommand registerCommand = new (FirstName: request.FirstName, LastName: request.LastName, Email: request.Email, Password: request.Password);
 
-        await _mediator.Send(registerCommand);
+        AuthenticationResult result = await _mediator.Send(registerCommand);
 
-        return Ok();
+        return Ok(result);
     }
 
     [Route("login"), HttpPost]
@@ -38,9 +40,9 @@ public class AuthenticationController : ControllerBase
     {
         LoginQuery loginQuery = new (Email: request.Email, Password: request.Password);
 
-        await _mediator.Send(loginQuery);
+        AuthenticationResult result = await _mediator.Send(loginQuery);
 
-        return Ok();
+        return Ok(result);
     }
 }
 

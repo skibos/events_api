@@ -1,36 +1,38 @@
-﻿using Events.Application.Common.Interfaces.Persistance;
+﻿using Events.Application.Authentication.Dto;
+using Events.Application.Common.Interfaces.Persistance;
+using Events.Application.Common.Interfaces.Services;
 using Events.Domain.Users;
 using Events.Domain.Users.Exceptions;
 using MediatR;
 
-namespace Events.Application.Authentication.Commands.Register
+namespace Events.Application.Authentication.Commands.Register;
+
+public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthenticationResult>
 {
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
+    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticationService _authenticationService;
+
+    public RegisterCommandHandler(IUserRepository userRepository, IAuthenticationService authenticationService)
     {
-        private readonly IUserRepository _userRepository;
+        _userRepository = userRepository;
+        _authenticationService = authenticationService;
+    }
 
-        public RegisterCommandHandler(IUserRepository userRepository)
+    public async Task<AuthenticationResult> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    {
+        User? userFromDb = await _userRepository.GetByEmail(command.Email);
+
+        if (userFromDb is not null)
         {
-            _userRepository = userRepository;
+            throw new UserAlreadyExistsException(command.Email);
         }
 
-        public async Task<Unit> Handle(RegisterCommand command, CancellationToken cancellationToken)
-        {
-            User? userFromDb = await _userRepository.GetByEmail(command.Email);
+        User newUser = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));
+        await _userRepository.Add(newUser);
 
-            if (userFromDb is not null)
-            {
-                throw new UserAlreadyExistsException(command.Email);
-            }
+        string token = _authenticationService.GenerateJwtToken(newUser.Id.Value, newUser.FirstName, newUser.LastName);
 
-            User newUser = User.Create(command.FirstName, command.LastName, command.Email, BCrypt.Net.BCrypt.HashPassword(command.Password));
-
-            await _userRepository.Add(newUser);
-
-            return Unit.Value;
-            // TODO: generate jwt
-            // TODO: return authentication result
-        }
+        return new AuthenticationResult(token, newUser.Id.Value);
     }
 }
 

@@ -14,11 +14,13 @@
     <None Remove="Persistance\" />
     <None Remove="Persistance\Repositories\" />
     <None Remove="Persistance\Configurations\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistance\" />
     <Folder Include="Persistance\Repositories\" />
     <Folder Include="Persistance\Configurations\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
@@ -26,5 +28,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.36" />
   </ItemGroup>
 </Project>

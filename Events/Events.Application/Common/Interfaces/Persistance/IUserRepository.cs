@@ -1,11 +1,11 @@
 ﻿using Events.Domain.Users;
 
-namespace Events.Application.Common.Interfaces.Persistance
+namespace Events.Application.Common.Interfaces.Persistance;
+
+public interface IUserRepository
 {
-	public interface IUserRepository
-	{
-		Task Add(User user);
-		Task<User?> GetByEmail(string email);
-	}
+	Task Add(User user);
+	Task<User?> GetByEmail(string email);
 }
+
 

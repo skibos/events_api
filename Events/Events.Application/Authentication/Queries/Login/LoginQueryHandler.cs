@@ -1,20 +1,24 @@
-﻿using Events.Application.Common.Interfaces.Persistance;
+﻿using Events.Application.Authentication.Dto;
+using Events.Application.Common.Interfaces.Persistance;
+using Events.Application.Common.Interfaces.Services;
 using Events.Domain.Users;
 using Events.Domain.Users.Exceptions;
 using MediatR;
 
 namespace Events.Application.Authentication.Queries.Login
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public LoginQueryHandler(IUserRepository userRepository)
+        public LoginQueryHandler(IUserRepository userRepository, IAuthenticationService authenticationService)
         {
             _userRepository = userRepository;
+            _authenticationService = authenticationService;
         }
 
-        public async Task<Unit> Handle(LoginQuery query, CancellationToken cancellationToken)
+        public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
             User? userFromDb = await _userRepository.GetByEmail(query.Email);
 
@@ -30,9 +34,9 @@ namespace Events.Application.Authentication.Queries.Login
                 throw new IncorrectPasswordException(query.Email);
             }
 
-            return Unit.Value;
-            // TODO: generate jwt
-            // TODO: return authentication result
+            string token = _authenticationService.GenerateJwtToken(userFromDb.Id.Value, userFromDb.FirstName, userFromDb.LastName);
+
+            return new AuthenticationResult(token, userFromDb.Id.Value);
         }
     }
 }
