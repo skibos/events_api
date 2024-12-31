@@ -3,6 +3,7 @@ using MediatR;
 using Events.API.Dto.Auth;
 using Events.Application.Authentication.Commands.Register;
 using Events.Domain.Users.Exceptions;
+using Events.Application.Authentication.Queries.Login;
 
 namespace Events.Controllers;
 
@@ -26,12 +27,19 @@ public class AuthenticationController : ControllerBase
 
         await _mediator.Send(registerCommand);
 
-        return NoContent();
+        return Ok();
     }
 
     [Route("login"), HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(IncorrectPasswordException))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(UserNotExistsException))]
     public async Task<IActionResult> Login(LoginRequest request)
     {
+        LoginQuery loginQuery = new (Email: request.Email, Password: request.Password);
+
+        await _mediator.Send(loginQuery);
+
         return Ok();
     }
 }

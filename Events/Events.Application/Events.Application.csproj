@@ -22,6 +22,7 @@
     <None Remove="Common\" />
     <None Remove="Common\Interfaces\" />
     <None Remove="Common\Interfaces\Persistance\" />
+    <None Remove="Authentication\Queries\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Authentication\" />
@@ -31,5 +32,6 @@
     <Folder Include="Common\" />
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Interfaces\Persistance\" />
+    <Folder Include="Authentication\Queries\Login\" />
   </ItemGroup>
 </Project>
