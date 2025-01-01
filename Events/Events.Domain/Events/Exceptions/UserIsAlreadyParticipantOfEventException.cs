@@ -3,9 +3,9 @@ using Events.Domain.Common.Exceptions;
 
 namespace Events.Domain.Events.Exceptions;
 
-public class UserIsAlreadyParticipantException : DomainHttpException
+public class UserIsAlreadyParticipantOfEventException : DomainHttpException
 {
-	public UserIsAlreadyParticipantException() : base("User already exists in events participants list")
+	public UserIsAlreadyParticipantOfEventException() : base("User already exists in event participants list")
 	{
         StatusCode = HttpStatusCode.Conflict;
     }

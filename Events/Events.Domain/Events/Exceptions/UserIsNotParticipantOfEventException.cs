@@ -6,7 +6,7 @@ namespace Events.Domain.Events.Exceptions
 {
 	public class UserIsNotParticipantOfEventException : DomainHttpException
 	{
-        public UserIsNotParticipantOfEventException() : base("User already exists in events participants list")
+        public UserIsNotParticipantOfEventException() : base("User not exists in event participants list")
         {
             StatusCode = HttpStatusCode.NotFound;
         }
