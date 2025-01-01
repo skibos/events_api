@@ -13,6 +13,11 @@
     <None Remove="Users\ValueObjects\" />
     <None Remove="Users\Exceptions\" />
     <None Remove="Common\Exceptions\" />
+    <None Remove="Events\" />
+    <None Remove="Events\ValueObjects\" />
+    <None Remove="Events\Entities\" />
+    <None Remove="Events\Enums\" />
+    <None Remove="Events\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
@@ -21,6 +26,11 @@
     <Folder Include="Users\ValueObjects\" />
     <Folder Include="Users\Exceptions\" />
     <Folder Include="Common\Exceptions\" />
+    <Folder Include="Events\" />
+    <Folder Include="Events\ValueObjects\" />
+    <Folder Include="Events\Entities\" />
+    <Folder Include="Events\Enums\" />
+    <Folder Include="Events\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />
