@@ -13,31 +13,30 @@
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Authentication\Commands\" />
-    <None Remove="Authentication\Queries\" />
-    <None Remove="Authentication\Commands\Register\" />
     <None Remove="Common\" />
     <None Remove="Common\Interfaces\" />
     <None Remove="Common\Interfaces\Persistance\" />
-    <None Remove="Authentication\Queries\Login\" />
     <None Remove="Common\Interfaces\Services\" />
-    <None Remove="Authentication\Dto\" />
     <None Remove="Events\" />
     <None Remove="Auth\" />
+    <None Remove="Events\Commands\" />
+    <None Remove="Events\Queries\" />
+    <None Remove="Events\Dto\" />
+    <None Remove="Events\Commands\CreateEvent\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Authentication\Commands\" />
-    <Folder Include="Authentication\Queries\" />
-    <Folder Include="Authentication\Commands\Register\" />
     <Folder Include="Common\" />
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Interfaces\Persistance\" />
-    <Folder Include="Authentication\Queries\Login\" />
     <Folder Include="Common\Interfaces\Services\" />
-    <Folder Include="Authentication\Dto\" />
     <Folder Include="Events\" />
     <Folder Include="Auth\" />
+    <Folder Include="Events\Commands\" />
+    <Folder Include="Events\Queries\" />
+    <Folder Include="Events\Dto\" />
+    <Folder Include="Events\Commands\CreateEvent\" />
   </ItemGroup>
 </Project>

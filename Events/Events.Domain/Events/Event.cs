@@ -15,18 +15,28 @@ public sealed class Event : AggregateRoot<EventId, Guid>
 	public string Name { get; private set; }
 	public string Description { get; private set; }
 	public Location Location { get; private set; }
+	public DateTime StartTime { get; private set; }
+	public DateTime EndTime { get; private set; }
 	public EventStatus EventStatus { get; private set; }
 	public IReadOnlyList<Participant> Participants => _participants.AsReadOnly();
 
-	public Event(
+	#pragma warning disable CS8618
+    private Event() { }
+	#pragma warning restore CS8618
+
+    public Event(
 		EventId id,
 		string name,
 		string description,
-		Location location) : base(id)
+		Location location,
+		DateTime startTime,
+		DateTime endTime) : base(id)
 	{
 		Name = name;
 		Description = description;
 		Location = location;
+		StartTime = startTime;
+		EndTime = endTime;
 		EventStatus = EventStatus.Scheduled;
 	}
 
@@ -34,17 +44,31 @@ public sealed class Event : AggregateRoot<EventId, Guid>
 		UserId eventCreatorId,
 		string name,
 		string description,
-		Location location
+		Location location,
+		DateTime startTime,
+		DateTime endTime
 	)
 	{
+		if (startTime.ToUniversalTime() < DateTime.UtcNow)
+		{
+			throw new StartTimeBeforeNowException();
+		}
+
+		if (endTime.ToUniversalTime() < startTime.ToUniversalTime())
+		{
+			throw new EndTimeBeforeStartTimeException();
+		}
+
 		Event newEvent = new(
 			EventId.CreateUnique(),
 			name,
 			description,
-			location
+			location,
+			startTime,
+			endTime
 		);
 
-		newEvent.AddParticipant(new Participant(eventCreatorId, ParticipantRole.Organizer, AttendanceStatus.Confirmed));
+		newEvent.AddParticipant(new Participant(ParticipantId.CreateUnique(), eventCreatorId, ParticipantRole.Organizer, AttendanceStatus.Confirmed));
 
 		return newEvent;
 	}
