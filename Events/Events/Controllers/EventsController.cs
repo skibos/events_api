@@ -1,5 +1,6 @@
 ﻿using Events.API.Dto.Events;
 using Events.Application.Events.Commands.CreateEvent;
+using Events.Application.Events.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,9 +51,9 @@ public class EventsController : ControllerBase
     {
         CreateEventCommand command = new(request.Name, request.Description, request.Latitude, request.Longitude, request.StartTime, request.EndTime);
 
-        await _mediator.Send(command);
+        EventResult result = await _mediator.Send(command);
 
-        return Ok();
+        return Ok(result);
     }
 
     [HttpPatch]

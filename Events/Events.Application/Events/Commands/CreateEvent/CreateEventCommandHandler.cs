@@ -1,4 +1,5 @@
 ﻿using Events.Application.Common.Interfaces.Persistance;
+using Events.Application.Events.Dto;
 using Events.Domain.Events;
 using Events.Domain.Events.ValueObjects;
 using Events.Domain.Users.ValueObjects;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Events.Application.Events.Commands.CreateEvent;
 
-public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand>
+public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, EventResult>
 {
     private readonly IEventRepository _eventRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -18,7 +19,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand>
         _httpContextAccessor = httpContextAccessor;
 	}
 
-    public async Task<Unit> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+    public async Task<EventResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
     {
         string? userId = _httpContextAccessor.HttpContext?.User.FindFirst("user_id")?.Value;
 
@@ -40,7 +41,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand>
 
         await _eventRepository.Add(newEvent);
 
-        return Unit.Value;
+        return new EventResult(newEvent.Id.Value);
     }
 }
 

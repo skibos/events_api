@@ -1,4 +1,5 @@
 ﻿
+using Events.Application.Events.Dto;
 using MediatR;
 
 namespace Events.Application.Events.Commands.CreateEvent;
@@ -9,4 +10,4 @@ public record CreateEventCommand(
     double Latitude,
     double Longitude,
     DateTime StartTime,
-    DateTime EndTime) : IRequest;
+    DateTime EndTime) : IRequest<EventResult>;
