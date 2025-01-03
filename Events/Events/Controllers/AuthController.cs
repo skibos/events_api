@@ -5,17 +5,16 @@ using Events.Application.Authentication.Commands.Register;
 using Events.Domain.Users.Exceptions;
 using Events.Application.Authentication.Queries.Login;
 using Events.Application.Authentication.Dto;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Events.Controllers;
 
 [ApiController]
 [Route("auth")]
-public class AuthenticationController : ControllerBase
+public class AuthController : ControllerBase
 {
     private readonly ISender _mediator;
 
-    public AuthenticationController(ISender mediator)
+    public AuthController(ISender mediator)
     {
         _mediator = mediator;
     }

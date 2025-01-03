@@ -15,7 +15,6 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Authentication\" />
     <None Remove="Authentication\Commands\" />
     <None Remove="Authentication\Queries\" />
     <None Remove="Authentication\Commands\Register\" />
@@ -25,9 +24,10 @@
     <None Remove="Authentication\Queries\Login\" />
     <None Remove="Common\Interfaces\Services\" />
     <None Remove="Authentication\Dto\" />
+    <None Remove="Events\" />
+    <None Remove="Auth\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Authentication\" />
     <Folder Include="Authentication\Commands\" />
     <Folder Include="Authentication\Queries\" />
     <Folder Include="Authentication\Commands\Register\" />
@@ -37,5 +37,7 @@
     <Folder Include="Authentication\Queries\Login\" />
     <Folder Include="Common\Interfaces\Services\" />
     <Folder Include="Authentication\Dto\" />
+    <Folder Include="Events\" />
+    <Folder Include="Auth\" />
   </ItemGroup>
 </Project>
