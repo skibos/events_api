@@ -10,4 +10,4 @@ public record CreateEventCommand(
     double Latitude,
     double Longitude,
     DateTime StartTime,
-    DateTime EndTime) : IRequest<EventResult>;
+    DateTime EndTime) : IRequest<EventCreatedResult>;

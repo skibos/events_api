@@ -27,6 +27,10 @@
     <None Remove="Events\Dto\" />
     <None Remove="Events\Commands\CreateEvent\" />
     <None Remove="Events\Commands\CancelEvent\" />
+    <None Remove="Events\Queries\GetAllEvents\" />
+    <None Remove="Events\Queries\GetEvent\" />
+    <None Remove="Events\Queries\GetAllParticipantsByEvent\" />
+    <None Remove="Events\Queries\GetParticipantByEvent\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
@@ -40,5 +44,9 @@
     <Folder Include="Events\Dto\" />
     <Folder Include="Events\Commands\CreateEvent\" />
     <Folder Include="Events\Commands\CancelEvent\" />
+    <Folder Include="Events\Queries\GetAllEvents\" />
+    <Folder Include="Events\Queries\GetEvent\" />
+    <Folder Include="Events\Queries\GetAllParticipantsByEvent\" />
+    <Folder Include="Events\Queries\GetParticipantByEvent\" />
   </ItemGroup>
 </Project>

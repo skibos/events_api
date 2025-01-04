@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Events.Application.Events.Commands.CreateEvent;
 
-public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, EventResult>
+public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, EventCreatedResult>
 {
     private readonly IEventRepository _eventRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -19,7 +19,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
         _httpContextAccessor = httpContextAccessor;
 	}
 
-    public async Task<EventResult> Handle(CreateEventCommand command, CancellationToken cancellationToken)
+    public async Task<EventCreatedResult> Handle(CreateEventCommand command, CancellationToken cancellationToken)
     {
         string? userId = _httpContextAccessor.HttpContext?.User.FindFirst("user_id")?.Value;
 
@@ -41,7 +41,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
 
         await _eventRepository.Add(newEvent);
 
-        return new EventResult(newEvent.Id.Value);
+        return new EventCreatedResult(newEvent.Id.Value);
     }
 }
 

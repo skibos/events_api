@@ -2,6 +2,8 @@
 using Events.Application.Events.Commands.CancelEvent;
 using Events.Application.Events.Commands.CreateEvent;
 using Events.Application.Events.Dto;
+using Events.Application.Events.Queries.GetEvent;
+using Events.Application.Events.Queries.GetParticipantByEvent;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +32,11 @@ public class EventsController : ControllerBase
     [Route("{eventId}")]
     public async Task<IActionResult> GetEvent(string eventId)
     {
-        return Ok();
+        GetEventQuery query = new GetEventQuery(Guid.Parse(eventId));
+
+        EventResult result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 
     [HttpGet]
@@ -41,10 +47,14 @@ public class EventsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{eventId}/participants/{participantId}")]
-    public async Task<IActionResult> GetParticipantByEvent(string eventId, string participantId)
+    [Route("{eventId}/participants/{userId}")]
+    public async Task<IActionResult> GetParticipantByEvent(string eventId, string userId)
     {
-        return Ok();
+        GetParticipantByEventQuery query = new GetParticipantByEventQuery(Guid.Parse(eventId), Guid.Parse(userId));
+
+        ParticipantResult result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 
     [HttpPost]
@@ -52,7 +62,7 @@ public class EventsController : ControllerBase
     {
         CreateEventCommand command = new(request.Name, request.Description, request.Latitude, request.Longitude, request.StartTime, request.EndTime);
 
-        EventResult result = await _mediator.Send(command);
+        EventCreatedResult result = await _mediator.Send(command);
 
         return Ok(result);
     }

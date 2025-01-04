@@ -1,6 +1,7 @@
 ﻿using System;
 using Events.Application.Common.Interfaces.Persistance;
 using Events.Domain.Events;
+using Events.Domain.Events.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Events.Infrastructure.Persistance.Repositories

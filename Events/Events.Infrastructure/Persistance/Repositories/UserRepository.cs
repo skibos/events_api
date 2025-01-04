@@ -24,6 +24,11 @@ namespace Events.Infrastructure.Persistance.Repositories
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        public async Task<User?> GetById(Guid id)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();

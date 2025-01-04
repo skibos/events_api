@@ -24,7 +24,7 @@ namespace Events.Application.Authentication.Queries.Login
 
             if (userFromDb is null)
             {
-                throw new UserNotExistsException(query.Email);
+                throw new UserNotExistsException();
             }
 
             bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(query.Password, userFromDb.Password);
