@@ -1,4 +1,5 @@
 ﻿using Events.API.Dto.Events;
+using Events.Application.Events.Commands.CancelEvent;
 using Events.Application.Events.Commands.CreateEvent;
 using Events.Application.Events.Dto;
 using MediatR;
@@ -60,6 +61,10 @@ public class EventsController : ControllerBase
     [Route("{eventId}/cancel")]
     public async Task<IActionResult> CancelEvent(string eventId)
     {
+        CancelEventCommand command = new(Guid.Parse(eventId));
+
+        await _mediator.Send(command);
+
         return Ok();
     }
 }

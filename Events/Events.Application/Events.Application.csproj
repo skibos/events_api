@@ -26,6 +26,7 @@
     <None Remove="Events\Queries\" />
     <None Remove="Events\Dto\" />
     <None Remove="Events\Commands\CreateEvent\" />
+    <None Remove="Events\Commands\CancelEvent\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
@@ -38,5 +39,6 @@
     <Folder Include="Events\Queries\" />
     <Folder Include="Events\Dto\" />
     <Folder Include="Events\Commands\CreateEvent\" />
+    <Folder Include="Events\Commands\CancelEvent\" />
   </ItemGroup>
 </Project>

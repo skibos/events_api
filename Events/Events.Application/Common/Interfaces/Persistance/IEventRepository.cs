@@ -2,7 +2,8 @@
 
 namespace Events.Application.Common.Interfaces.Persistance;
 
-public interface IEventRepository
+public interface IEventRepository : IRepository
 {
 	Task Add(Event newEvent);
+	Task<Event?> GetById(Guid id);
 }

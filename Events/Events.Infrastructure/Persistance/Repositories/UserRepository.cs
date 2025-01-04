@@ -16,12 +16,17 @@ namespace Events.Infrastructure.Persistance.Repositories
         public async Task Add(User user)
         {
             _dbContext.Add(user);
-            await _dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task<User?> GetByEmail(string email)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

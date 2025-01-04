@@ -1,6 +1,7 @@
 ﻿using System;
 using Events.Application.Common.Interfaces.Persistance;
 using Events.Domain.Events;
+using Microsoft.EntityFrameworkCore;
 
 namespace Events.Infrastructure.Persistance.Repositories
 {
@@ -16,6 +17,16 @@ namespace Events.Infrastructure.Persistance.Repositories
         public async Task Add(Event newEvent)
         {
             _dbContext.Add(newEvent);
+            await SaveChangesAsync();
+        }
+
+        public async Task<Event?> GetById(Guid id)
+        {
+            return await _dbContext.Events.FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await _dbContext.SaveChangesAsync();
         }
     }

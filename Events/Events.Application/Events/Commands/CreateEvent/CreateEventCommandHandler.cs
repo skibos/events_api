@@ -19,7 +19,7 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
         _httpContextAccessor = httpContextAccessor;
 	}
 
-    public async Task<EventResult> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+    public async Task<EventResult> Handle(CreateEventCommand command, CancellationToken cancellationToken)
     {
         string? userId = _httpContextAccessor.HttpContext?.User.FindFirst("user_id")?.Value;
 
@@ -28,15 +28,15 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
             throw new UnauthorizedAccessException();
         }
 
-        Location location = Location.CreateNew(request.Latitude, request.Longitude);
+        Location location = Location.CreateNew(command.Latitude, command.Longitude);
 
         Event newEvent = Event.Create(
             UserId.Create(Guid.Parse(userId)),
-            request.Name,
-            request.Description,
+            command.Name,
+            command.Description,
             location,
-            request.StartTime,
-            request.EndTime
+            command.StartTime,
+            command.EndTime
         );
 
         await _eventRepository.Add(newEvent);

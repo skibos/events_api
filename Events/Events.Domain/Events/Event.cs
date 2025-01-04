@@ -97,7 +97,12 @@ public sealed class Event : AggregateRoot<EventId, Guid>
         participant.AttendanceStatus = newAttendaceStatus;
     }
 
-	private Participant GetParticipantOfEvent(UserId participantId)
+    public void CancelEvent()
+    {
+		EventStatus = EventStatus.Canceled;
+    }
+
+    private Participant GetParticipantOfEvent(UserId participantId)
     {
 		return _participants.FirstOrDefault(p => p.Id == participantId) ?? throw new UserIsNotParticipantOfEventException();
     }
