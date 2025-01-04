@@ -1,7 +1,10 @@
-﻿using Events.API.Dto.Events;
+﻿using Events.API.Dto.Common;
+using Events.API.Dto.Events;
+using Events.Application.Common.Dto;
 using Events.Application.Events.Commands.CancelEvent;
 using Events.Application.Events.Commands.CreateEvent;
 using Events.Application.Events.Dto;
+using Events.Application.Events.Queries.GetAllEvents;
 using Events.Application.Events.Queries.GetEvent;
 using Events.Application.Events.Queries.GetParticipantByEvent;
 using MediatR;
@@ -23,9 +26,13 @@ public class EventsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllEvents()
+    public async Task<IActionResult> GetAllEvents([FromQuery] PaginatedRequest request)
     {
-        return Ok();
+        GetAllEventsQuery query = new GetAllEventsQuery(request.PageNumber, request.PageSize);
+
+        PaginatedResult<EventResult> result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 
     [HttpGet]

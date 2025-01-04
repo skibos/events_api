@@ -31,6 +31,7 @@
     <None Remove="Events\Queries\GetEvent\" />
     <None Remove="Events\Queries\GetAllParticipantsByEvent\" />
     <None Remove="Events\Queries\GetParticipantByEvent\" />
+    <None Remove="Common\Dto\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
@@ -48,5 +49,6 @@
     <Folder Include="Events\Queries\GetEvent\" />
     <Folder Include="Events\Queries\GetAllParticipantsByEvent\" />
     <Folder Include="Events\Queries\GetParticipantByEvent\" />
+    <Folder Include="Common\Dto\" />
   </ItemGroup>
 </Project>

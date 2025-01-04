@@ -29,10 +29,12 @@
     <None Remove="dto\Auth\" />
     <None Remove="Middleware\" />
     <None Remove="Dto\Events\" />
+    <None Remove="Dto\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dto\Auth\" />
     <Folder Include="Middleware\" />
     <Folder Include="Dto\Events\" />
+    <Folder Include="Dto\Common\" />
   </ItemGroup>
 </Project>
