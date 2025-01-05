@@ -29,6 +29,11 @@ namespace Events.Infrastructure.Persistance.Repositories
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<List<User>> GetUsersByIds(List<Guid> ids)
+        {
+            return await _dbContext.Users.Where(u => ids.Contains(u.Id)).ToListAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
