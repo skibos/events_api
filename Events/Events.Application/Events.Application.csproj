@@ -14,6 +14,7 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Hangfire" Version="1.8.17" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Common\" />
@@ -32,6 +33,7 @@
     <None Remove="Events\Queries\GetAllParticipantsByEvent\" />
     <None Remove="Events\Queries\GetParticipantByEvent\" />
     <None Remove="Common\Dto\" />
+    <None Remove="Common\Interfaces\Workers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
@@ -50,5 +52,6 @@
     <Folder Include="Events\Queries\GetAllParticipantsByEvent\" />
     <Folder Include="Events\Queries\GetParticipantByEvent\" />
     <Folder Include="Common\Dto\" />
+    <Folder Include="Common\Interfaces\Workers\" />
   </ItemGroup>
 </Project>

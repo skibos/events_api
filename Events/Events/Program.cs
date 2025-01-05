@@ -2,6 +2,7 @@
 using Events.API.Middleware;
 using Events.Application;
 using Events.Infrastructure;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -17,6 +18,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseMiddleware<ErrorHandlingMiddleware>();
+    app.UseHangfireDashboard("/dashboard");
+    app.UseHangfireServer();
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();

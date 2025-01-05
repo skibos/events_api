@@ -97,9 +97,9 @@ public sealed class Event : AggregateRoot<EventId, Guid>
         participant.AttendanceStatus = newAttendaceStatus;
     }
 
-    public void CancelEvent()
+    public void ChangeEventStatus(EventStatus newStatus)
     {
-		EventStatus = EventStatus.Canceled;
+		EventStatus = newStatus;
     }
 
     private Participant GetParticipantOfEvent(UserId participantId)

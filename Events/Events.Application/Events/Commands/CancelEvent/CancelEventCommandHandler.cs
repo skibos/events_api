@@ -39,7 +39,7 @@ public class CancelEventCommandHandler : IRequestHandler<CancelEventCommand>
             throw new NotEventOrganizerException();
         }
 
-        myEvent.CancelEvent();
+        myEvent.ChangeEventStatus(EventStatus.Canceled);
 
         await _eventRepository.SaveChangesAsync();
 

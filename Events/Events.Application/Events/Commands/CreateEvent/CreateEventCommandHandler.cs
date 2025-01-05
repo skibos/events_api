@@ -1,8 +1,10 @@
 ﻿using Events.Application.Common.Interfaces.Persistance;
+using Events.Application.Common.Interfaces.Workers;
 using Events.Application.Events.Dto;
 using Events.Domain.Events;
 using Events.Domain.Events.ValueObjects;
 using Events.Domain.Users.ValueObjects;
+using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
@@ -12,11 +14,13 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
 {
     private readonly IEventRepository _eventRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly EventWorker _eventWorker;
 
-    public CreateEventCommandHandler(IEventRepository eventRepository, IHttpContextAccessor httpContextAccessor)
+    public CreateEventCommandHandler(IEventRepository eventRepository, IHttpContextAccessor httpContextAccessor, EventWorker eventWorker)
 	{
         _eventRepository = eventRepository;
         _httpContextAccessor = httpContextAccessor;
+        _eventWorker = eventWorker;
 	}
 
     public async Task<EventCreatedResult> Handle(CreateEventCommand command, CancellationToken cancellationToken)
@@ -40,6 +44,9 @@ public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Eve
         );
 
         await _eventRepository.Add(newEvent);
+
+        _eventWorker.ScheduleChangeEventStatusToOngoingJob(newEvent);
+        _eventWorker.ScheduleChangeEventStatusToCompletedJob(newEvent);
 
         return new EventCreatedResult(newEvent.Id.Value);
     }
