@@ -9,4 +9,49 @@
   <ItemGroup>
     <ProjectReference Include="..\Events.Domain\Events.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Hangfire" Version="1.8.17" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Common\" />
+    <None Remove="Common\Interfaces\" />
+    <None Remove="Common\Interfaces\Persistance\" />
+    <None Remove="Common\Interfaces\Services\" />
+    <None Remove="Events\" />
+    <None Remove="Auth\" />
+    <None Remove="Events\Commands\" />
+    <None Remove="Events\Queries\" />
+    <None Remove="Events\Dto\" />
+    <None Remove="Events\Commands\CreateEvent\" />
+    <None Remove="Events\Commands\CancelEvent\" />
+    <None Remove="Events\Queries\GetAllEvents\" />
+    <None Remove="Events\Queries\GetEvent\" />
+    <None Remove="Events\Queries\GetAllParticipantsByEvent\" />
+    <None Remove="Events\Queries\GetParticipantByEvent\" />
+    <None Remove="Common\Dto\" />
+    <None Remove="Common\Interfaces\Workers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Interfaces\Persistance\" />
+    <Folder Include="Common\Interfaces\Services\" />
+    <Folder Include="Events\" />
+    <Folder Include="Auth\" />
+    <Folder Include="Events\Commands\" />
+    <Folder Include="Events\Queries\" />
+    <Folder Include="Events\Dto\" />
+    <Folder Include="Events\Commands\CreateEvent\" />
+    <Folder Include="Events\Commands\CancelEvent\" />
+    <Folder Include="Events\Queries\GetAllEvents\" />
+    <Folder Include="Events\Queries\GetEvent\" />
+    <Folder Include="Events\Queries\GetAllParticipantsByEvent\" />
+    <Folder Include="Events\Queries\GetParticipantByEvent\" />
+    <Folder Include="Common\Dto\" />
+    <Folder Include="Common\Interfaces\Workers\" />
+  </ItemGroup>
 </Project>

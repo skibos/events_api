@@ -9,11 +9,32 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Events' " />
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.35" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.9.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Events.Application\Events.Application.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Events.Infrastructure\Events.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="dto\Auth\" />
+    <None Remove="Middleware\" />
+    <None Remove="Dto\Events\" />
+    <None Remove="Dto\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dto\Auth\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Dto\Events\" />
+    <Folder Include="Dto\Common\" />
   </ItemGroup>
 </Project>
